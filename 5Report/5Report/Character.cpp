@@ -13,7 +13,7 @@ Character::Character(FileManager* fileManager)
 
 	fileManager->LoadOBJ("star.obj", vertices, uvs, normals);
 
-	programID = fileManager->LoadShaders("star_vs.shader", "greemStar.shader");
+	programID = fileManager->LoadShaders("star_vs.shader", "greenStar.shader");
 
 	SetBuffer();
 }
