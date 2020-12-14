@@ -1,5 +1,5 @@
-#ifndef __ICLEANUP_H__
-#define __ICLEANUP_H__
+#ifndef ICLEANUP_H
+#define ICLEANUP_H
 
 class ICleanUp
 {
@@ -7,4 +7,4 @@ public :
 	virtual void ShutDown() = 0;
 };
 
-#endif // !__ICLEANUP_H__
+#endif // !ICLEANUP_H

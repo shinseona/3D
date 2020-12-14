@@ -306,3 +306,31 @@ GLuint FileManager::LoadDDS(const char* imagepath) {
 
 
 }
+void FileManager::loadObj(RenderObject* _object, const char* objname, const char* texturename, const char* vs_shader, const char* fs_shader)
+{
+	_object->programID = LoadShaders(vs_shader, fs_shader);
+	_object->matrixID = glGetUniformLocation(_object->programID, "MVP");
+	_object->texture = LoadDDS(texturename);
+	_object->textureID = glGetUniformLocation(_object->programID, "myTextureSampler");
+
+
+
+	glGenVertexArrays(1, &_object->VertexArrayID);
+	glBindVertexArray(_object->VertexArrayID);
+
+
+	LoadOBJ(objname, _object->vertices, _object->uvs, _object->normals);
+
+	glGenBuffers(1, &_object->vertexbuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, _object->vertexbuffer);
+	glBufferData(GL_ARRAY_BUFFER, _object->vertices.size() * sizeof(glm::vec3), &_object->vertices[0], GL_STATIC_DRAW);
+
+	glGenBuffers(1, &_object->uvbuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, _object->uvbuffer);
+	glBufferData(GL_ARRAY_BUFFER, _object->uvs.size() * sizeof(glm::vec2), &_object->uvs[0], GL_STATIC_DRAW);
+
+	glGenBuffers(1, &_object->normalbuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, _object->normalbuffer);
+	glBufferData(GL_ARRAY_BUFFER, _object->normals.size() * sizeof(glm::vec3), &_object->normals[0], GL_STATIC_DRAW);
+
+}

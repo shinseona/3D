@@ -1,17 +1,17 @@
-#ifndef __USEROBJECT_H__
-#define __USEROBJECT_H__
+#ifndef USEROBJECT_H
+#define USEROBJECT_H
 
-#include "RenderableObject.h"
+#include "RenderObject.h"
 
-class UserObject : public RenderableObject
+class UserObject : public RenderObject
 {
 public : 
 	UserObject(
 		FileManager* fileManager, 
-		const char* objfilePath,
-		const char* vertexfile_path,
-		const char* fragmentfile_path,
-		const char* texturefile_path);
+		const char* objfile,
+		const char* vertexfile,
+		const char* fragmentfile,
+		const char* texturefile);
 
 	~UserObject(){}
 
@@ -20,4 +20,4 @@ public :
 };
 
 
-#endif // !__USEROBJECT_H__
+#endif // !USEROBJECT_H

@@ -138,24 +138,39 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Character.cpp" />
+    <ClCompile Include="controls.cpp" />
     <ClCompile Include="FileManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="NonRenderableObject.cpp" />
+    <ClCompile Include="NonRenderObject.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="RenderableObject.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="RenderObject.cpp" />
     <ClCompile Include="Sphere.cpp" />
+    <ClCompile Include="Star.cpp" />
+    <ClCompile Include="Star2.cpp" />
     <ClCompile Include="UserObject.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Character.h" />
+    <ClInclude Include="controls.h" />
     <ClInclude Include="FileManager.h" />
     <ClInclude Include="ICleanUp.h" />
     <ClInclude Include="NonRenderableObject.h" />
+    <ClInclude Include="NonRenderObject.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="RenderableObject.h" />
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="RenderObject.h" />
     <ClInclude Include="Sphere.h" />
+    <ClInclude Include="Star.h" />
+    <ClInclude Include="Star2.h" />
     <ClInclude Include="UserObject.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="RenderableObject" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
