@@ -13,7 +13,7 @@ void Star::init()
 		"greenStar.shader"
 	);
 
-	this->setPosition(0, 0, 0);
+
 	this->setScale(0.2, 0.2, 0.2);
 }
 

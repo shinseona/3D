@@ -27,8 +27,8 @@ public:
 
 public:
 	RenderableObject();
-	virtual void init() {};
-	virtual void render() override {};
+	virtual void init(){};
+	virtual void render() override{};
 	virtual void update() override {};
 	virtual void shutDown() override {};
 	virtual void setPosition(float x, float y, float z) {};

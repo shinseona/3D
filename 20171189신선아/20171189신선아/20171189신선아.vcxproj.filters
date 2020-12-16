@@ -45,6 +45,12 @@
     <ClCompile Include="Ground.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="BlueStar.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="RedStar.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Controller.h">
@@ -77,13 +83,13 @@
     <ClInclude Include="ICleanUp.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="IRender.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="IUpdater.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="NonRenderableObject.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="IRender.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

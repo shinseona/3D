@@ -8,7 +8,7 @@ public:
 	NonRenderableObject();
 
 	virtual void init();
-	virtual void render() override;
+	virtual void render();
 	virtual void update() override;
 	virtual void shutDown() override;
 };
