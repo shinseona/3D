@@ -2,7 +2,7 @@
 #include "FileManager.h"
 #include "Controller.h"
 
-void Star::init()
+void BlueStar::init()
 {
 	FileManager* filemgr = FileManager::instance();
 
@@ -10,14 +10,13 @@ void Star::init()
 		this,
 		"star.obj",
 		"star_vs.shader",
-		"greenStar.shader"
+		"BlueStar.shader"
 	);
-
-
+	
 	this->setScale(0.2, 0.2, 0.2);
 }
 
-void Star::render()
+void BlueStar::render()
 {
 	glUseProgram(this->programID);
 
@@ -35,7 +34,7 @@ void Star::render()
 
 	glm::mat4 MoveObject = glm::mat4(1.0f);
 	MoveObject = glm::translate(MoveObject, this->ObjPosition);
-	
+
 	glm::mat4 scale = glm::mat4(1.0f);
 	scale = glm::scale(scale, this->Objscale);
 
@@ -92,21 +91,21 @@ void Star::render()
 	glDisableVertexAttribArray(2);
 }
 
-void Star::update()
+void BlueStar::update()
 {
 
 }
 
-void Star::setPosition(float x, float y, float z)
+void BlueStar::setPosition(float x, float y, float z)
 {
 	ObjPosition = glm::vec3(x, y, z);
 }
-void Star::setScale(float x, float y, float z)
+void BlueStar::setScale(float x, float y, float z)
 {
 	Objscale = glm::vec3(x, y, z);
 }
 
-void Star::shutDown()
+void BlueStar::shutDown()
 {
 	glDeleteBuffers(1, &vertexbuffer);
 	glDeleteBuffers(1, &uvbuffer);

@@ -139,12 +139,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BlueStar.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="FileManager.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="Human.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="NonRenderableObject.cpp" />
+    <ClCompile Include="RedStar.cpp" />
     <ClCompile Include="RenderableObject.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Star.cpp" />
