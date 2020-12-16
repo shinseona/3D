@@ -8,6 +8,9 @@
 #include "include/GLFW/glfw3.h" 
 
 class RenderableObject;
+class NonRenderableObject;
+class IRenderer;
+class IUpdater;
 
 class Renderer : public ICleanUp
 {
@@ -15,7 +18,9 @@ public :
 	Renderer();
 	~Renderer() {}
 	void Initialize();
-	void draw(RenderableObject* object);
+	void draw();
+	void AddObject(IRenderer* render_obj);
+	void Update(IUpdater* src_obj);
 
 	void SetViewMatrix(glm::mat4 src_ViewMatrix) {ViewMatrix = src_ViewMatrix; }
 	GLFWwindow* GetWindow() const { return window; }
@@ -30,4 +35,6 @@ private :
 	GLuint VertexArrayID;
 
 	GLFWwindow* window;
+
+	std::vector<IRenderer*> objectArray;
 };

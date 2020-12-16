@@ -1,4 +1,6 @@
 #include "Renderer.h"
+#include"IRenderer.h"
+#include "IUpdater.h"
 
 #include <iostream>
 
@@ -32,7 +34,7 @@ void Renderer::Initialize()
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	// Open a window and create its OpenGL context
-	window = glfwCreateWindow(1024, 768, "3D Architecture", NULL, NULL);
+	window = glfwCreateWindow(1024, 768, "Report7", NULL, NULL);
 	if (window == NULL) {
 		fprintf(stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n");
 		std::getchar();
@@ -73,70 +75,87 @@ void Renderer::Initialize()
 }
 
 
-void Renderer::draw(RenderableObject* object)
+void Renderer::draw()
 {
-	// Use our shader
-	glUseProgram(object->programID);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	for (std::vector<IRenderer*>::iterator i = objectArray.begin(); i != objectArray.end(); i++)
+	{
+		// Use our shader
+		glUseProgram((*i)->programID);
 
-	glm::mat4 MVP = ProjectionMatrix * ViewMatrix * object->GetTranslate() * ModelMatrix;
+		glm::mat4 MVP = ProjectionMatrix * ViewMatrix * (*i)->GetTranslate() * ModelMatrix;
 
-	// Send our transformation to the currently bound shader, 
-	// in the "MVP" uniform
-	glUniformMatrix4fv(object->matrixID, 1, GL_FALSE, &MVP[0][0]);
-	glUniformMatrix4fv(object->modelMatrixID, 1, GL_FALSE, &ModelMatrix[0][0]);
-	glUniformMatrix4fv(object->viewMatrixID, 1, GL_FALSE, &ViewMatrix[0][0]);
+		// Send our transformation to the currently bound shader, 
+		// in the "MVP" uniform
+		glUniformMatrix4fv((*i)->matrixID, 1, GL_FALSE, &MVP[0][0]);
+		glUniformMatrix4fv((*i)->modelMatrixID, 1, GL_FALSE, &ModelMatrix[0][0]);
+		glUniformMatrix4fv((*i)->viewMatrixID, 1, GL_FALSE, &ViewMatrix[0][0]);
 
-	// Bind our texture in Texture Unit 0
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, object->texture);
-	glUniform1i(object->textureID, 0);
+		// Bind our texture in Texture Unit 0
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, (*i)->texture);
+		glUniform1i((*i)->textureID, 0);
 
-	// 1rst attribute buffer : vertices
-	glEnableVertexAttribArray(0);
-	glBindBuffer(GL_ARRAY_BUFFER, object->vertexbuffer);
-	glVertexAttribPointer(
-		0,                  // attribute
-		3,                  // size
-		GL_FLOAT,           // type
-		GL_FALSE,           // normalized?
-		0,                  // stride
-		(void*)0            // array buffer offset
-	);
+		// 1rst attribute buffer : vertices
+		glEnableVertexAttribArray(0);
+		glBindBuffer(GL_ARRAY_BUFFER, (*i)->vertexbuffer);
+		glVertexAttribPointer(
+			0,                  // attribute
+			3,                  // size
+			GL_FLOAT,           // type
+			GL_FALSE,           // normalized?
+			0,                  // stride
+			(void*)0            // array buffer offset
+		);
 
-	// 2nd attribute buffer : UVs
-	glEnableVertexAttribArray(1);
-	glBindBuffer(GL_ARRAY_BUFFER, object->uvbuffer);
-	glVertexAttribPointer(
-		1,                                // attribute
-		2,                                // size
-		GL_FLOAT,                         // type
-		GL_FALSE,                         // normalized?
-		0,                                // stride
-		(void*)0                          // array buffer offset
-	);
+		// 2nd attribute buffer : UVs
+		glEnableVertexAttribArray(1);
+		glBindBuffer(GL_ARRAY_BUFFER, (*i)->uvbuffer);
+		glVertexAttribPointer(
+			1,                                // attribute
+			2,                                // size
+			GL_FLOAT,                         // type
+			GL_FALSE,                         // normalized?
+			0,                                // stride
+			(void*)0                          // array buffer offset
+		);
 
-	// 3rd attribute buffer : normals
-	glEnableVertexAttribArray(2);
-	glBindBuffer(GL_ARRAY_BUFFER, object->normalbuffer);
-	glVertexAttribPointer(
-		2,                                // attribute
-		3,                                // size
-		GL_FLOAT,                         // type
-		GL_FALSE,                         // normalized?
-		0,                                // stride
-		(void*)0                          // array buffer offset
-	);
+		// 3rd attribute buffer : normals
+		glEnableVertexAttribArray(2);
+		glBindBuffer(GL_ARRAY_BUFFER, (*i)->normalbuffer);
+		glVertexAttribPointer(
+			2,                                // attribute
+			3,                                // size
+			GL_FLOAT,                         // type
+			GL_FALSE,                         // normalized?
+			0,                                // stride
+			(void*)0                          // array buffer offset
+		);
 
-	// Draw the triangles !
-	glDrawArrays(GL_TRIANGLES, 0, object->vertices.size());
+		// Draw the triangles !
+		glDrawArrays(GL_TRIANGLES, 0, (*i)->vertices.size());
 
 
-	glDisableVertexAttribArray(0);
-	glDisableVertexAttribArray(1);
-	glDisableVertexAttribArray(2);
+		glDisableVertexAttribArray(0);
+		glDisableVertexAttribArray(1);
+		glDisableVertexAttribArray(2);
+	}
+
+	glfwSwapBuffers(window);
+	glfwPollEvents();
 }
 
 void Renderer::ShutDown()
 {
 	glDeleteVertexArrays(1, &VertexArrayID);
+}
+
+void Renderer::AddObject(IRenderer* render_obj)
+{
+	objectArray.push_back(render_obj);
+}
+
+void Renderer::Update(IUpdater* src_obj)
+{
+	src_obj->Update();
 }

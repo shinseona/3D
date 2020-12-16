@@ -16,6 +16,30 @@
 #define FOURCC_DXT3 0x33545844 // Equivalent to "DXT3" in ASCII
 #define FOURCC_DXT5 0x35545844 // Equivalent to "DXT5" in ASCII
 
+std::vector<GLfloat> FileManager::ReadCsvData(const char* _filePath)
+{
+	std::fstream fs;
+	std::string val;
+
+	std::vector <GLfloat> buffer_data;
+
+	fs.open(_filePath);
+
+	while (!fs.eof())
+	{
+		getline(fs, val, ',');
+		buffer_data.push_back(atof(val.c_str()));
+	}
+
+	if (fs.fail())
+	{
+		std::cout << "해당 경로에 위치하는 파일이 존재하지 않습니다." << std::endl;
+	}
+
+	fs.close();
+	return buffer_data;
+}
+
 GLuint FileManager::LoadShaders(const char* vertex_file_path, const char* fragment_file_path) 
 {
 	// Create the shaders

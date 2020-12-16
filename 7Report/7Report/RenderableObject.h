@@ -2,41 +2,29 @@
 #define __RENDERABLEOBJECT_H__
 
 #include "Object.h"
+#include "IRenderer.h"
 
 class Object;
 class FileManager;
 
-class RenderableObject : public Object
+class RenderableObject : public Object, public IRenderer
 {
 public:
-	RenderableObject() {}
+	RenderableObject();
 	~RenderableObject(){}
 
 	void SetBuffer();
 
 	virtual void ShutDown() override;
 
-public:
-	GLuint vertexbuffer;
-	GLuint uvbuffer;
-	GLuint normalbuffer;
+	virtual glm::mat4  GetTranslate() override { return Object::GetTranslate();  }
 
-	std::vector<glm::vec3> vertices;
-	std::vector<glm::vec2> uvs;
-	std::vector<glm::vec3> normals;
+	virtual void InitData() override;
 
-	GLuint programID;
-	GLuint matrixID;
-	GLuint viewMatrixID;
-	GLuint modelMatrixID;
+	FileManager* fileManager;
 
-	glm::mat4 ProjectionMatrix;
-	glm::mat4 ViewMatrix;
-	glm::mat4 ModelMatrix;
-
-
-	GLuint texture;
-	GLuint textureID;
+	const char* objfilePath;
+	const char* texturefile_path;
 	
 };
 

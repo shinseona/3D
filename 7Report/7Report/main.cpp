@@ -6,6 +6,7 @@
 #include "Renderer.h"
 #include "Sphere.h"
 #include "UserObject.h"
+#include "SampleNonRender.h"
 
 
 int main()
@@ -15,16 +16,24 @@ int main()
 	Renderer* renderer = new Renderer();
 	renderer->Initialize();
 
+	//cube
 	UserObject* cube = new UserObject(
 		fileManager, 
 		"cube.obj", 
-		"vs_w7.shader", "fs_w7.shader", 
 		"uvtemplate.dds");
 
-	cube->SetPosition(glm::vec3(3.0f, 3.0f, 0.0f));
+	cube->SetPosition(glm::vec3(2.0f, 2.0f, 0.0f));
+	renderer->AddObject(cube);
 	
-	Sphere* sphere = new Sphere(fileManager);
+	//Sphere
+	Sphere* sphere = new  Sphere(fileManager);
+
 	sphere->SetPosition(glm::vec3(0.0f, 0.0f, 0.0f));
+	renderer->AddObject(sphere);
+
+	//NonRenderableObject
+	SampleNonRender* non_render_obj = new SampleNonRender();
+
 	
 	renderer->SetViewMatrix(glm::lookAt(
 		glm::vec3(15, 4, 3), // Camera is at (4,3,3), in World Space
@@ -32,18 +41,11 @@ int main()
 		glm::vec3(0, -1, 0)  // Head is up (set to 0,-1,0 to look upside-down)
 	));
 
-	do
+	while (true)
 	{
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-		renderer->draw(cube);
-		renderer->draw(sphere);
-
-		glfwSwapBuffers(renderer->GetWindow());
-		glfwPollEvents();
-
-	} while (glfwGetKey(renderer->GetWindow(), GLFW_KEY_ESCAPE) != GLFW_PRESS &&
-		glfwWindowShouldClose(renderer->GetWindow()) == 0);
+		renderer->Update(non_render_obj);
+		renderer->draw();
+	}
 
 	glfwTerminate();
 

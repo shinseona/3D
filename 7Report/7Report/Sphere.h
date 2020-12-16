@@ -9,6 +9,8 @@ public :
 	Sphere(FileManager* fileManager);
 	~Sphere() {}
 	
+	virtual void InitData() override;
+
 	virtual void ShutDown() override;
 
 };

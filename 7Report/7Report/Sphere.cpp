@@ -1,13 +1,19 @@
 #include "Sphere.h"
 #include "FileManager.h"
+#include "IRenderer.h"
 
-Sphere::Sphere(FileManager* fileManager)
+Sphere::Sphere(FileManager* filemgr)
 {
-	textureID = glGetUniformLocation(programID, "myTextureSampler");
+	fileManager = filemgr;
+
+	InitData();
+}
+
+void Sphere::InitData()
+{
+	RenderableObject::InitData();
 
 	fileManager->LoadOBJ("sphere.obj", vertices, uvs, normals);
-
-	programID = fileManager->LoadShaders("vs_w7.shader", "fs_w7.shader");
 
 	texture = fileManager->LoadDDS("moon.dds");
 

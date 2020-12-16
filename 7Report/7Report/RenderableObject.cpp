@@ -1,6 +1,18 @@
 #include "RenderableObject.h"
 #include "FileManager.h"
 
+RenderableObject::RenderableObject()
+{
+	
+}
+
+void RenderableObject::InitData()
+{
+	textureID = glGetUniformLocation(programID, "myTextureSampler");
+
+	programID = fileManager->LoadShaders("vs_w7.shader", "fs_w7.shader");
+}
+
 void RenderableObject::SetBuffer()
 {
 	matrixID = glGetUniformLocation(programID, "MVP");

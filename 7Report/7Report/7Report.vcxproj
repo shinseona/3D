@@ -18,10 +18,34 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="FileManager.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="NonRenderableObject.cpp" />
+    <ClCompile Include="Object.cpp" />
+    <ClCompile Include="RenderableObject.cpp" />
+    <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="SampleNonRender.cpp" />
+    <ClCompile Include="Sphere.cpp" />
+    <ClCompile Include="UserObject.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="FileManager.h" />
+    <ClInclude Include="ICleanUp.h" />
+    <ClInclude Include="IRenderer.h" />
+    <ClInclude Include="IUpdater.h" />
+    <ClInclude Include="NonRenderableObject.h" />
+    <ClInclude Include="Object.h" />
+    <ClInclude Include="RenderableObject.h" />
+    <ClInclude Include="Renderer.h" />
+    <ClInclude Include="SampleNonRender.h" />
+    <ClInclude Include="Sphere.h" />
+    <ClInclude Include="UserObject.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{fc8b02c1-8d94-4f9d-ad65-81eb35195795}</ProjectGuid>
+    <ProjectGuid>{f7a78618-41f3-4720-ab8e-27d9e523307c}</ProjectGuid>
     <RootNamespace>My7Report</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -138,26 +162,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="FileManager.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="NonRenderableObject.cpp" />
-    <ClCompile Include="Object.cpp" />
-    <ClCompile Include="RenderableObject.cpp" />
-    <ClCompile Include="Renderer.cpp" />
-    <ClCompile Include="Sphere.cpp" />
-    <ClCompile Include="UserObject.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="FileManager.h" />
-    <ClInclude Include="ICleanUp.h" />
-    <ClInclude Include="NonRenderableObject.h" />
-    <ClInclude Include="Object.h" />
-    <ClInclude Include="RenderableObject.h" />
-    <ClInclude Include="Renderer.h" />
-    <ClInclude Include="Sphere.h" />
-    <ClInclude Include="UserObject.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

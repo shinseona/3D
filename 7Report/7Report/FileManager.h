@@ -8,7 +8,7 @@
 class FileManager
 {
 public : 
-
+	std::vector<GLfloat>ReadCsvData(const char* _filePath);
 	GLuint LoadShaders(const char* vertex_file_path, const char* fragment_file_path);
 	void LoadOBJ(
 		const char* path,
